@@ -18,6 +18,9 @@ const auth = require('./src/routes/auth.routes.js')
 // * PUERTO Y FRONT
 const { PORT, FRONTEND_URL } = require('./src/config')
 
+// * NECESARIO PARA CONSTRUIR LA RUTA A INDEX HTML
+const path = require('path');
+
 // * APP --
 const app = express()
 app.use(cors({
@@ -34,4 +37,12 @@ app.use('/r', redirectUrl)
 app.use('/api', auth)
 
 connectMongoDB()
+
+// Configuración para manejar rutas de cliente
+app.use(express.static(path.join(__dirname, 'dist')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+});
+
 app.listen(PORT, () => console.log('Server on PORT 5000'))
