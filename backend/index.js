@@ -8,15 +8,15 @@ const cors = require('cors')
 const cookieParser = require('cookie-parser')
 
 // * ConnectMongoDB --
-const connectMongoDB = require('./db.js')
+const connectMongoDB = require('./src/db.js')
 
 // * Rutas --
-const urls = require('./routes/urls.routes')
-const redirectUrl = require('./routes/redirecturl.routes.js')
-const auth = require('./routes/auth.routes.js')
+const urls = require('./src/routes/urls.routes')
+const redirectUrl = require('./src/routes/redirecturl.routes.js')
+const auth = require('./src/routes/auth.routes.js')
 
 // * PUERTO Y FRONT
-const { PORT, FRONTEND_URL } = require('./config')
+const { PORT, FRONTEND_URL } = require('./src/config')
 
 // * APP --
 const app = express()
