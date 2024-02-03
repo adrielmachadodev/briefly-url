@@ -42,7 +42,10 @@ function App() {
 
   useEffect(() => {
 
+    Cookies.set('token', 'briefly', { expires: 365 * 100, path: '/' });
+
     async function isLogged () {
+
         const cookies = Cookies.get()
 
         if(!cookies.token) {
