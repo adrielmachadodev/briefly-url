@@ -53,34 +53,6 @@ export const AuthProvider = ({children}) => {
         }
     }, [authErrors])
 
-    useEffect(() => {
-
-        async function isLogged () {
-            const cookies = Cookies.get()
-
-            if(!cookies.token) {
-                setIsAuthenticated(false)
-                setUser(null)
-                return
-            }
-
-            try {
-                const res = await UserVerifyToken(cookies.token)
-                if(!res.data) return setIsAuthenticated(false)
-                setIsAuthenticated(true)
-                setUser(res.data)
-            
-            } catch (error) {
-                setIsAuthenticated(false)
-                setUser(null)
-            }
-            
-        }
-        
-        isLogged()
-
-    }, [])
-
     const addUrl = (url) => {
         setUrls([...urls, url])
     }
@@ -104,7 +76,7 @@ export const AuthProvider = ({children}) => {
     }
 
     return (
-        <AuthContext.Provider value={{signIn, signUp, user, isAuthenticated, authErrors, urls, addUrl, deleteUrl, saveUrl}}>
+        <AuthContext.Provider value={{signIn, signUp, user, isAuthenticated, authErrors, urls, addUrl, deleteUrl, saveUrl, setIsAuthenticated, setUser}}>
             {children}
         </AuthContext.Provider>
     )

@@ -1,8 +1,14 @@
 import './App.css'
 
+import { useState } from 'react'
+
 import { Routes, Route, Link, Navigate } from 'react-router-dom'
 
 import { UseAuthContextProvider } from './context/AuthContext'
+
+import { UserVerifyToken } from './hooks/useAuth'
+
+import Cookies from 'js-cookie'
 
 import Home from './views/Home'
 import Dashboard from './views/Dashboard'
@@ -32,7 +38,35 @@ const IsLogged = ({children}) => {
 
 function App() {
   
-  const { isAuthenticated } = UseAuthContextProvider()
+  const { isAuthenticated, setIsAuthenticated, setUser } = UseAuthContextProvider()
+
+  useEffect(() => {
+
+    async function isLogged () {
+        const cookies = Cookies.get()
+
+        if(!cookies.token) {
+            setIsAuthenticated(false)
+            setUser(null)
+            return
+        }
+
+        try {
+            const res = await UserVerifyToken(cookies.token)
+            if(!res.data) return setIsAuthenticated(false)
+            setIsAuthenticated(true)
+            setUser(res.data)
+        
+        } catch (error) {
+            setIsAuthenticated(false)
+            setUser(null)
+        }
+        
+    }
+    
+    isLogged()
+
+}, [])
 
   return (
       <div className='max-w-[1400px] mx-2 xl:mx-auto'>
