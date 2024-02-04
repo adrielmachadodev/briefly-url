@@ -42,9 +42,9 @@ export const UserVerifyToken = async (token) => {
 }
 
 export const UseLogout = async () => {
+  Cookies.remove('token')
   try {
     const res = await axios.post('/logout')
-    Cookies.remove('token')
     return res
   } catch (error) {
       toast(error.response.data.message)
