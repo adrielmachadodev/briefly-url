@@ -4,7 +4,7 @@ const { TOKEN_SECRET } = require('../config')
 
 const User = require('../models/user.model')
 
-const verifyToken = (req, res) => {
+const verifyToken = (req, res, next) => {
 
     const { token } = req.cookies
 
@@ -14,6 +14,7 @@ const verifyToken = (req, res) => {
         if(error) return res.status(401).json({message:'Unauthorized'})
         const userFound = await User.findById(user.id)
         if(!userFound) return res.status(401).json({message:'Unauthorized'})
+
         return res.json({
             id:userFound._id, 
             email:userFound, 
