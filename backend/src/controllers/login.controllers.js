@@ -23,11 +23,12 @@ const login = async (req, res) => {
 
         // Crear token y setearlo en la cookie
         const token = await createAccessToken({id: userFound._id})
-        res.cookie('token', token, {
-            sameSite: 'none',
+        res.cookie("token", token, {
+            // httpOnly: true,
             secure: true,
-            httpOnly: false
-        })
+            sameSite: "none",
+            maxAge: 24 * 60 * 60 * 1000, // 1 day
+          });
 
         res.json({
             id:userFound._id,

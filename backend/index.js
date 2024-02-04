@@ -18,22 +18,15 @@ const auth = require('./src/routes/auth.routes.js')
 // * PUERTO Y FRONT
 const { PORT, FRONTEND_URL } = require('./src/config')
 
-// * NECESARIO PARA CONSTRUIR LA RUTA A INDEX HTML
-const path = require('path');
-
 // * APP --
 const app = express()
 app.use(cors({
     origin: FRONTEND_URL,
-    credentials: true,
-    withCredentials:true
+    credentials: true
 }))
 
 app.use(express.json())
-app.use(cookieParser(null, {
-    secure: true,
-    sameSite: 'true',
-}));
+app.use(cookieParser())
 
 
 // * Use routes --
