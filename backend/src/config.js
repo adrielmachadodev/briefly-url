@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const TOKEN_SECRET = process.env.TOKEN_SECRET
 
 const FRONTEND_URL = process.env.FRONTEND_URL

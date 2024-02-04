@@ -1,6 +1,7 @@
 import { createContext, useState, useContext, useEffect } from "react";
 import { UseLogin, UseRegister, UserVerifyToken } from "../hooks/useAuth";
 import Cookies from 'js-cookie'
+import axios from '../config/axios'
 
 export const AuthContext = createContext()
 
@@ -57,19 +58,39 @@ export const AuthProvider = ({children}) => {
 
         async function isLogged () {
     
-            const cookies = Cookies.get()
-    
-            try {
-                const res = await UserVerifyToken(cookies.token)
-                if(!res.data) return setIsAuthenticated(false)
-                setIsAuthenticated(true)
-                setUser(res.data)
+            // const cookies = Cookies.get()
+
+            // if(!cookies.token) {
+            //     setIsAuthenticated(false)
+            //     setUser(null)
+            //     setAuthErrors(null)
+            //     return
+            // }
+
+            // try {
+            //     const res = await UserVerifyToken(cookies.token)
+            //     if(!res.data) return setIsAuthenticated(false)
+            //     setIsAuthenticated(true)
+            //     setUser(res.data)
             
-            } catch (error) {
-                setIsAuthenticated(false)
-                setUser(null)
+            // } catch (error) {
+            //     setIsAuthenticated(false)
+            //     setUser(null)
+            // }
+            
+            if (Cookies.get("token")) {
+                axios
+                  .get("/verify")
+                  .then((res) => {
+                    setUser(res.data);
+                    setIsAuthenticated(true);
+                  })
+                  .catch((err) => {
+                    setUser(null);
+                    setIsAuthenticated(false);
+                  });
             }
-            
+
         }
         
         isLogged()
