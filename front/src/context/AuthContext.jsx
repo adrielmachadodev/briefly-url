@@ -99,19 +99,17 @@ export const AuthProvider = ({children}) => {
     }, [])
 
     const verifyLogin = () => {
-        if (Cookies.get("token")) {
-            axios
-              .get("/verify")
-              .then((res) => {
-                console.log(res);
-                setUser(res.data);
-                setIsAuthenticated(true);
-              })
-              .catch((err) => {
-                setUser(null);
-                setIsAuthenticated(false);
-              });
-        }
+        axios
+            .get("/verify")
+            .then((res) => {
+            console.log(res);
+            setUser(res.data);
+            setIsAuthenticated(true);
+            })
+            .catch((err) => {
+            setUser(null);
+            setIsAuthenticated(false);
+        });
     }
 
     const addUrl = (url) => {
