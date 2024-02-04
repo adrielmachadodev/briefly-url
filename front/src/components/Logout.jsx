@@ -1,17 +1,14 @@
 import React from 'react'
 
-import { UseLogout } from '../hooks/useAuth'
+import { UseAuthContextProvider } from '../context/AuthContext' 
 
 const Logout = () => {
 
-    const handleLogout = async () => {
-        const res = await UseLogout()
-        if(res.status === 200) location.reload()
-    }
+    const { signOut } = UseAuthContextProvider()
 
     return (
         <button
-            onClick={handleLogout}
+            onClick={signOut}
         >
             Logout
         </button>

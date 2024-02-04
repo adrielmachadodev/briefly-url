@@ -44,6 +44,12 @@ export const AuthProvider = ({children}) => {
         }
     }
 
+    const signOut = async () => {
+        await axios.post("/logout");
+        setUser(null);
+        setIsAuthenticated(false);
+    };
+
     useEffect(() => {
 
         if(authErrors){
@@ -135,7 +141,7 @@ export const AuthProvider = ({children}) => {
     }
 
     return (
-        <AuthContext.Provider value={{signIn, signUp, user, isAuthenticated, authErrors, urls, addUrl, deleteUrl, saveUrl, setIsAuthenticated, setUser, verifyLogin}}>
+        <AuthContext.Provider value={{signIn, signUp, signOut, user, isAuthenticated, authErrors, urls, addUrl, deleteUrl, saveUrl, setIsAuthenticated, setUser, verifyLogin}}>
             {children}
         </AuthContext.Provider>
     )

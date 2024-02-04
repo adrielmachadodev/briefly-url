@@ -42,7 +42,6 @@ export const UserVerifyToken = async (token) => {
 }
 
 export const UseLogout = async () => {
-  Cookies.remove('token')
   try {
     const res = await axios.post('/logout')
     return res
@@ -51,3 +50,4 @@ export const UseLogout = async () => {
       console.log(error);
   }
 }
+
