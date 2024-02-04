@@ -2,6 +2,8 @@ import axios from '../config/axios.js'
 
 import { toast } from 'react-toastify'
 
+import Cookies from 'js-cookie'
+
 export const UseLogin = async (user) => {
     try {
       const res = await axios.post('/login', {
@@ -40,6 +42,12 @@ export const UserVerifyToken = async (token) => {
 }
 
 export const UseLogout = async () => {
+
+
+  const cookies = Cookies.get()
+
+  console.log(cookies)
+
   try {
     const res = await axios.post('/logout')
     return res
