@@ -56,8 +56,6 @@ export const AuthProvider = ({children}) => {
 
     useEffect(() => {
 
-        Cookies.set('token', 'briefly', { expires: 365 * 100, path: '/' });
-    
         async function isLogged () {
     
             const cookies = Cookies.get()
