@@ -1,6 +1,5 @@
 import { createContext, useState, useContext, useEffect } from "react";
 import { UseLogin, UseRegister, UserVerifyToken } from "../hooks/useAuth";
-import { UserVerifyToken } from './hooks/useAuth'
 import Cookies from 'js-cookie'
 
 export const AuthContext = createContext()
