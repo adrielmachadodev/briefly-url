@@ -1,5 +1,6 @@
 import { createContext, useState, useContext, useEffect } from "react";
 import { UseLogin, UseRegister, UserVerifyToken } from "../hooks/useAuth";
+import { UserVerifyToken } from './hooks/useAuth'
 import Cookies from 'js-cookie'
 
 export const AuthContext = createContext()
@@ -52,6 +53,37 @@ export const AuthProvider = ({children}) => {
             return () => clearTimeout(timer)
         }
     }, [authErrors])
+
+    useEffect(() => {
+
+        Cookies.set('token', 'briefly', { expires: 365 * 100, path: '/' });
+    
+        async function isLogged () {
+    
+            const cookies = Cookies.get()
+    
+            if(!cookies.token) {
+                setIsAuthenticated(false)
+                setUser(null)
+                return
+            }
+    
+            try {
+                const res = await UserVerifyToken(cookies.token)
+                if(!res.data) return setIsAuthenticated(false)
+                setIsAuthenticated(true)
+                setUser(res.data)
+            
+            } catch (error) {
+                setIsAuthenticated(false)
+                setUser(null)
+            }
+            
+        }
+        
+        isLogged()
+    
+    }, [])
 
     const addUrl = (url) => {
         setUrls([...urls, url])
