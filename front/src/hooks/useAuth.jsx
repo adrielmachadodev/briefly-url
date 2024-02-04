@@ -40,14 +40,3 @@ export const UserVerifyToken = async (token) => {
       console.log(error);
   }
 }
-
-export const UseLogout = async () => {
-  try {
-    const res = await axios.post('/logout')
-    return res
-  } catch (error) {
-      toast(error.response.data.message)
-      console.log(error);
-  }
-}
-

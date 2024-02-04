@@ -22,11 +22,15 @@ const { PORT, FRONTEND_URL } = require('./src/config')
 const app = express()
 app.use(cors({
     origin: FRONTEND_URL,
-    credentials: true
+    credentials: true,
+    withCredentials:true
 }))
 
 app.use(express.json())
-app.use(cookieParser())
+app.use(cookieParser(null, {
+    secure: true,
+    sameSite: 'true',
+}));
 
 
 // * Use routes --
