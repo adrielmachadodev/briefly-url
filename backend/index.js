@@ -32,7 +32,7 @@ app.use(cors({
 app.use(express.json())
 app.use(cookieParser(null, {
     secure: true,
-    sameSite: 'Lex',
+    sameSite: 'true',
 }));
 
 
