@@ -15,6 +15,8 @@ const isLogged = (req, res, next) => {
 
     const token = getTokenFrom(req)
 
+    if(!token) return next()
+
     jwt.verify(token, TOKEN_SECRET, (error, user) => {
         if(error) return next()
         req.user = user

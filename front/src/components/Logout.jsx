@@ -10,7 +10,7 @@ const Logout = () => {
         <button
             onClick={signOut}
         >
-            Logout
+            /Logout
         </button>
     )
 }

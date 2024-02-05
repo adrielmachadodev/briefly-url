@@ -31,7 +31,7 @@ const IsLogged = ({children}) => {
 
 function App() {
   
-  const { isAuthenticated } = UseAuthContextProvider()
+  const { isAuthenticated, user } = UseAuthContextProvider()
 
   return (
       <div className='max-w-[1400px] mx-2 xl:mx-auto'>
@@ -44,7 +44,10 @@ function App() {
             </>
             : <Link to="/login">/Login</Link>
           }
-          <a href="https://www.linkedin.com/in/adriel-machado-50892025a/" target='_blank'>LinkedIn</a>
+          <a href="https://www.linkedin.com/in/adriel-machado-50892025a/" target='_blank'>/LinkedIn</a>
+          {
+            isAuthenticated && <p>#{user.username}</p>
+          }
         </Header>
         <Routes>
           <Route path="/" element={<Home />} />

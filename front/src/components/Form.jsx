@@ -18,7 +18,7 @@ const Form = ({setIsCreate}) => {
         if(errors.originUrl || errors.shortUrl) return
         if(!urls.originUrl) return
         resetOriginUrl()
-        const { data } = await useAddUrls(urls.originUrl, urls.shortUrl, user.token)
+        const { data } = await useAddUrls(urls.originUrl, urls.shortUrl, user?.token)
         if(data) {
             data.isSave = false
             addUrl(data)
