@@ -1,10 +1,16 @@
 import LoginForm from "../components/LoginForm"
 
+import { motion } from 'framer-motion'
+
 import { Link } from "react-router-dom"
 
 const Login = () => {
   return (
-    <div>
+    <motion.div
+      initial={{opacity:0, y:100}}
+      animate={{opacity:1, y:0}}
+      transition={{delay:0.175}}
+    >
         <div className='mt-32 mb-8'>
             <h1 className='text-center text-3xl md:text-6xl mb-2 md:mb-5'>Iniciar sesión en BriefLy</h1>
         </div>
@@ -12,7 +18,7 @@ const Login = () => {
             <LoginForm />
             <Link to="/register" className="text-sm">No tienes cuenta? Regístrate.</Link>
         </div>
-    </div>
+    </motion.div>
   )
 }
 

@@ -4,6 +4,8 @@ import { UseAuthContextProvider } from '../context/AuthContext'
 
 import Resultados from '../components/Resultados'
 
+import { motion } from 'framer-motion'
+
 const Dashboard = () => {
 
   const { user } = UseAuthContextProvider()
@@ -23,7 +25,12 @@ const Dashboard = () => {
   return (
     <div>
         <div className='mt-32 mb-8'>
-            <h1 className='text-3xl md:text-6xl mb-2 md:mb-5'>Dashboard</h1>
+            <motion.h1 
+              className='text-3xl md:text-6xl mb-2 md:mb-5'
+              initial={{opacity:0, y:100}}
+              animate={{opacity:1, y:0}}
+              transition={{delay:0.175}}
+            >Dashboard</motion.h1>
         </div>
         <Resultados
           result={urls}

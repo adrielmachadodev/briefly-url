@@ -1,8 +1,8 @@
 import { useState } from 'react'
-
 import { Link } from 'react-router-dom'
-
 import { UseAuthContextProvider } from '../context/AuthContext'
+
+import { motion } from 'framer-motion'
 
 import Form from '../components/Form'
 import Resultados from '../components/Resultados'
@@ -19,11 +19,26 @@ const Home = () => {
         <div className=''>
             <main className='mt-32 mb-8'>
                 <div>
-                    <h1 className='text-3xl md:text-6xl mb-2 md:mb-5'>Acortá tus URLs de forma gratuita.</h1>
-                    <h2 className='text-xl md:text-2xl mb-6 '>iniciá sesión, te dará beneficios</h2>
+                    <motion.h1 
+                        className='text-3xl md:text-6xl mb-2 md:mb-5'
+                        initial={{opacity:0, y:100}}
+                        animate={{opacity:1, y:0}}
+                        transition={{delay:0.175}}
+                    >Acortá tus URLs de forma gratuita.</motion.h1>
+                    <motion.h2 
+                        className='text-xl md:text-2xl mb-6 '
+                        initial={{opacity:0, y:100}}
+                        animate={{opacity:1, y:0}}
+                        transition={{delay:0.25}}
+                    >iniciá sesión, te dará beneficios</motion.h2>
                 </div>
                 <div>
-                <div className='flex items-center gap-6'>
+                <motion.div 
+                    className='flex items-center gap-6'
+                    initial={{opacity:0, y:100}}
+                    animate={{opacity:1, y:0}}
+                    transition={{delay:0.35}}
+                >
                     <button onClick={() => setIsCreate(!isCreate)} className='flex items-center gap-[6px] cursor-pointer'>
                         Creá tu primer link
                         <img className='w-4' src={Brush} />
@@ -39,7 +54,7 @@ const Home = () => {
                                 <img className='w-4' src={LogIcon} />
                             </Link>
                     }
-                </div>
+                </motion.div>
                 {
                     isCreate &&
                     <Form 
