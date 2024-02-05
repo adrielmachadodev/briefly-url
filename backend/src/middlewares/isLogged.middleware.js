@@ -14,7 +14,6 @@ const getTokenFrom = request => {
 const isLogged = (req, res, next) => {
 
     const token = getTokenFrom(req)
-    if(!token) return res.status(401).json({message:'Token missing or invalid'})
 
     jwt.verify(token, TOKEN_SECRET, (error, user) => {
         if(error) return next()
