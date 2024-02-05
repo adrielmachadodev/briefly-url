@@ -1,7 +1,5 @@
 import { createContext, useState, useContext, useEffect } from "react";
-import { UseLogin, UseRegister, UserVerifyToken } from "../hooks/useAuth";
-import Cookies from 'js-cookie'
-import axios from '../config/axios'
+import { UseLogin, UseRegister } from "../hooks/useAuth";
 
 export const AuthContext = createContext()
 
