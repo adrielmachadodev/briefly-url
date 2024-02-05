@@ -34,7 +34,7 @@ const IsLogged = ({children}) => {
 
 function App() {
   
-  const { isAuthenticated, verifyLogin } = UseAuthContextProvider()
+  const { isAuthenticated } = UseAuthContextProvider()
 
   return (
       <div className='max-w-[1400px] mx-2 xl:mx-auto'>
@@ -48,7 +48,6 @@ function App() {
             : <Link to="/login">/Login</Link>
           }
           <a href="https://www.linkedin.com/in/adriel-machado-50892025a/" target='_blank'>LinkedIn</a>
-          <button onClick={verifyLogin}>VerifyLogin</button>
         </Header>
         <Routes>
           <Route path="/" element={<Home />} />

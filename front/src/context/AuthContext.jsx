@@ -50,6 +50,7 @@ export const AuthProvider = ({children}) => {
         window.localStorage.removeItem('userLogged')
         setUser(null);
         setIsAuthenticated(false);
+        location.reload()
     };
 
     useEffect(() => {
@@ -112,20 +113,6 @@ export const AuthProvider = ({children}) => {
 
     }, [])
 
-    const verifyLogin = () => {
-        axios
-            .get("/verify")
-            .then((res) => {
-            console.log(res);
-            setUser(res.data);
-            setIsAuthenticated(true);
-            })
-            .catch((err) => {
-            setUser(null);
-            setIsAuthenticated(false);
-        });
-    }
-
     const addUrl = (url) => {
         setUrls([...urls, url])
     }
@@ -149,7 +136,7 @@ export const AuthProvider = ({children}) => {
     }
 
     return (
-        <AuthContext.Provider value={{signIn, signUp, signOut, user, isAuthenticated, authErrors, urls, addUrl, deleteUrl, saveUrl, setIsAuthenticated, setUser, verifyLogin}}>
+        <AuthContext.Provider value={{signIn, signUp, signOut, user, isAuthenticated, authErrors, urls, addUrl, deleteUrl, saveUrl, setIsAuthenticated, setUser }}>
             {children}
         </AuthContext.Provider>
     )
