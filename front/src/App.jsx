@@ -17,17 +17,14 @@ import { ToastContainer } from 'react-toastify'
 const ProtectedRoute = ({children}) => {
 
   const { isAuthenticated } = UseAuthContextProvider()
-  console.log(isAuthenticated)
 
   if(!isAuthenticated) return <Navigate to="/" />
   return children
-  
 }
 
 const IsLogged = ({children}) => {
   const { isAuthenticated } = UseAuthContextProvider()
   
-
   if(isAuthenticated) return <Navigate to="/dashboard" />
   return children
 }

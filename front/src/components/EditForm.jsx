@@ -2,12 +2,16 @@ import { useEffect } from 'react'
 
 import BackgroundBlur from './BackgroundBlur'
 
+import { UseAuthContextProvider } from '../context/AuthContext'
+
 import { UseInputEditUrl } from '../hooks/useInputs'
 
 import { useEditUrls } from '../hooks/useUrl'
 
 const EditForm = ( {setIsEdit, editUrl, id} ) => {
     
+    const { user } = UseAuthContextProvider()
+
     const { originUrl, handleChange, errors, setOriginUrl, resetOriginUrl } = UseInputEditUrl()
 
     const handleSubmit = async (e) => {
@@ -15,7 +19,7 @@ const EditForm = ( {setIsEdit, editUrl, id} ) => {
         if(errors) return
         if(!originUrl) return
         resetOriginUrl()
-        const { data } = await useEditUrls(id, originUrl)
+        const { data } = await useEditUrls(id, originUrl, user.token)
         if(data) {
             setIsEdit(false)
             location.reload()

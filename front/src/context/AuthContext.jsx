@@ -36,6 +36,8 @@ export const AuthProvider = ({children}) => {
 
         try {
             const res = await UseRegister(user)
+            res.data.token = `bearer ${res.data.token}`
+            window.localStorage.setItem('userLogged', JSON.stringify(res.data))
             setUser(res.data)
             setIsAuthenticated(true)
             setAuthErrors(null)
@@ -64,46 +66,6 @@ export const AuthProvider = ({children}) => {
     }, [authErrors])
 
     useEffect(() => {
-
-        // async function isLogged () {
-    
-            // const cookies = Cookies.get()
-
-            // if(!cookies.token) {
-            //     setIsAuthenticated(false)
-            //     setUser(null)
-            //     setAuthErrors(null)
-            //     return
-            // }
-
-            // try {
-            //     const res = await UserVerifyToken(cookies.token)
-            //     if(!res.data) return setIsAuthenticated(false)
-            //     setIsAuthenticated(true)
-            //     setUser(res.data)
-            
-            // } catch (error) {
-            //     setIsAuthenticated(false)
-            //     setUser(null)
-            // }
-            
-            // if (Cookies.get("token")) {
-            //     axios
-            //       .get("/verify")
-            //       .then((res) => {
-            //         console.log(res);
-            //         setUser(res.data);
-            //         setIsAuthenticated(true);
-            //       })
-            //       .catch((err) => {
-            //         setUser(null);
-            //         setIsAuthenticated(false);
-            //       });
-            // }
-
-        // }
-        
-        // isLogged()
 
         const loggedUser = JSON.parse(window.localStorage.getItem('userLogged'))
         if(loggedUser) {

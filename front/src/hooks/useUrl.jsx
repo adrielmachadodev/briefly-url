@@ -32,9 +32,14 @@ export const useGetUrls = async (token) => {
     }
 }
 
-export const useDeleteUrls = async (url) => {
+export const useDeleteUrls = async (url, token) => {
+
+    const config = {
+        headers: { Authorization: token },
+    }
+
     try {
-        const res = await axios.delete(`/urls/${url}`)
+        const res = await axios.delete(`/urls/${url}`, config)
         return res
     } catch (error) {
         toast(error.response.data.message)
@@ -57,9 +62,14 @@ export const useSaveUrls = async (url, token) => {
     }   
 }
 
-export const useEditUrls = async (id, newUrl) => {
+export const useEditUrls = async (id, newUrl, token) => {
+
+    const config = {
+        headers: { Authorization: token }
+    }
+
     try {
-        const res = await axios.patch(`/urls/${id}`, {newUrl})
+        const res = await axios.patch(`/urls/${id}`, {newUrl}, config)
         return res
     } catch (error) {
         toast(error.response.data.message)

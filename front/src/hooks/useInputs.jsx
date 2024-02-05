@@ -24,7 +24,11 @@ export const UseInputOriginUrl = () => {
         shortUrl:''
     })
 
-    const generateRandomShortUrl = () =>  setUrls({...urls, shortUrl:generateId()})
+    const generateRandomShortUrl = () =>  {
+        const randomId = generateId()
+        setUrls({...urls, shortUrl:randomId})
+        ValidationInputUrl({...urls, shortUrl:randomId}, setErrors)
+    }
 
     return {
         urls,

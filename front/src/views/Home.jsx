@@ -51,9 +51,6 @@ const Home = () => {
             <Resultados result={urls}> 
                 Creados recientemente
             </Resultados>
-            {/* <button
-                onClick={() => console.log(urls)}
-            >Pruebas</button> */}
         </div>
   )
 }

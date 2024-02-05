@@ -21,14 +21,19 @@ const register = async (req, res) => {
 
         const token = await createAccessToken({id: saveUser._id})
 
-        res.cookie("token", token, {
-            // httpOnly: true,
-            secure: true,
-            sameSite: "none",
-            maxAge: 24 * 60 * 60 * 1000, // 1 day
-        });
+        // res.cookie("token", token, {
+        //     // httpOnly: true,
+        //     secure: true,
+        //     sameSite: "none",
+        //     maxAge: 24 * 60 * 60 * 1000, // 1 day
+        // });
 
-        res.json([{message:'Todo en orden'}])
+        res.json({
+            email:saveUser.email,
+            username:saveUser.username,
+            id:saveUser._id,
+            token: token
+        })
 
     } catch (error) {
         console.log(error);

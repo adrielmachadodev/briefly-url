@@ -11,11 +11,11 @@ import EditForm from '../EditForm'
 
 const ButtonsUpdateDelete = ({id, setUrls, originUrl}) => {
 
-    const { deleteUrl } = UseAuthContextProvider()
+    const { deleteUrl, user } = UseAuthContextProvider()
     const [ isEdit, setIsEdit ] = useState(false)
 
     const handleDelete = async () => {
-        const res = await useDeleteUrls(id)
+        const res = await useDeleteUrls(id, user.token)
         if(res.data) {
             setUrls(res.data)
             deleteUrl(id)
