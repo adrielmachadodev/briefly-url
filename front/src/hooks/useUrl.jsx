@@ -2,9 +2,14 @@ import axios from "../config/axios.js"
 
 import { toast } from 'react-toastify'
 
-export const useAddUrls = async (originUrl, shortUrl) => {
+export const useAddUrls = async (originUrl, shortUrl, token) => {
+
+    const config = {
+        headers: { Authorization: token },
+    }
+
     try {
-        const res = await axios.post('/urls', {originUrl, shortUrl: !shortUrl ? undefined : shortUrl})
+        const res = await axios.post('/urls', {originUrl, shortUrl: !shortUrl ? undefined : shortUrl}, config)
         return res
     } catch (error) {
         toast(error.response.data.message)
@@ -12,9 +17,14 @@ export const useAddUrls = async (originUrl, shortUrl) => {
     }
 }
 
-export const useGetUrls = async () => {
+export const useGetUrls = async (token) => {
+
+    const config = {
+        headers: { Authorization: token },
+    }
+
     try {
-        const res = await axios.get('/urls')
+        const res = await axios.get('/urls', config)
         return res
     } catch (error) {
         toast(error.response.data.message)
@@ -32,9 +42,14 @@ export const useDeleteUrls = async (url) => {
     }
 }
 
-export const useSaveUrls = async (url) => {
+export const useSaveUrls = async (url, token) => {
+
+    const config = {
+        headers: { Authorization: token }
+    }
+
     try {
-        const res = await axios.put(`/urls/${url}`)
+        const res = await axios.put(`/urls/${url}`, undefined , config)
         return res
     } catch (error) {
         toast(error.response.data.message)

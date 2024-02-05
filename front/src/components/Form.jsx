@@ -10,7 +10,7 @@ import randomButton from '../assets/random.svg'
 
 const Form = ({setIsCreate}) => {
 
-    const { addUrl } = UseAuthContextProvider()
+    const { addUrl, user } = UseAuthContextProvider()
     const { urls, handleChange, resetOriginUrl, errors, generateRandomShortUrl } = UseInputOriginUrl()
 
     const handleSubmit = async (e) => {
@@ -18,7 +18,7 @@ const Form = ({setIsCreate}) => {
         if(errors.originUrl || errors.shortUrl) return
         if(!urls.originUrl) return
         resetOriginUrl()
-        const { data } = await useAddUrls(urls.originUrl, urls.shortUrl)
+        const { data } = await useAddUrls(urls.originUrl, urls.shortUrl, user.token)
         if(data) {
             data.isSave = false
             addUrl(data)

@@ -9,12 +9,12 @@ import { useSaveUrls } from '../../hooks/useUrl'
 
 const ButtonSave = ({id, isSave}) => {
 
-    const { isAuthenticated, saveUrl } = UseAuthContextProvider()
+    const { isAuthenticated, saveUrl, user } = UseAuthContextProvider()
     const navigate = useNavigate()
 
     const handleButtonSave = async () => {
         if(!isAuthenticated) return navigate('/login')
-        const { data } = await useSaveUrls(id)
+        const { data } = await useSaveUrls(id, user.token)
         if(data) saveUrl(id)
     }
     

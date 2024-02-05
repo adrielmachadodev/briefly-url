@@ -21,6 +21,8 @@ export const AuthProvider = ({children}) => {
     const signIn = async user => {
         try {
             const res = await UseLogin(user)
+            res.data.token = `bearer ${res.data.token}`
+            window.localStorage.setItem('userLogged', JSON.stringify(res.data))
             setUser(res.data)
             setIsAuthenticated(true)
             setAuthErrors(null)
@@ -45,7 +47,7 @@ export const AuthProvider = ({children}) => {
     }
 
     const signOut = async () => {
-        await axios.post("/logout", {signOut:true});
+        window.localStorage.removeItem('userLogged')
         setUser(null);
         setIsAuthenticated(false);
     };
@@ -84,24 +86,30 @@ export const AuthProvider = ({children}) => {
             //     setUser(null)
             // }
             
-            if (Cookies.get("token")) {
-                axios
-                  .get("/verify")
-                  .then((res) => {
-                    console.log(res);
-                    setUser(res.data);
-                    setIsAuthenticated(true);
-                  })
-                  .catch((err) => {
-                    setUser(null);
-                    setIsAuthenticated(false);
-                  });
-            }
+            // if (Cookies.get("token")) {
+            //     axios
+            //       .get("/verify")
+            //       .then((res) => {
+            //         console.log(res);
+            //         setUser(res.data);
+            //         setIsAuthenticated(true);
+            //       })
+            //       .catch((err) => {
+            //         setUser(null);
+            //         setIsAuthenticated(false);
+            //       });
+            // }
 
         // }
         
         // isLogged()
-    
+
+        const loggedUser = JSON.parse(window.localStorage.getItem('userLogged'))
+        if(loggedUser) {
+            setUser(loggedUser)
+            setIsAuthenticated(true)
+        }
+
     }, [])
 
     const verifyLogin = () => {

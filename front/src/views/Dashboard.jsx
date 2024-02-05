@@ -1,16 +1,18 @@
 import { useState, useEffect } from 'react'
 import { useGetUrls } from '../hooks/useUrl'
+import { UseAuthContextProvider } from '../context/AuthContext'
 
 import Resultados from '../components/Resultados'
 
 const Dashboard = () => {
 
+  const { user } = UseAuthContextProvider()
   const [ urls, setUrls ] = useState([])
 
   useEffect(() => {
 
     async function getUrls () {
-      const res = await useGetUrls()
+      const res = await useGetUrls(user.token)
       setUrls(res.data)
     }
 
