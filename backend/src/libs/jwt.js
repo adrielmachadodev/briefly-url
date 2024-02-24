@@ -9,7 +9,7 @@ const createAccessToken = (payload) => {
             payload, 
             TOKEN_SECRET, 
             {
-                expiresIn: '1d',
+                expiresIn: '31d',
             },
             (err, token) => {
                 if(err) reject(err)
