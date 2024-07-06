@@ -14,6 +14,7 @@ const connectMongoDB = require('./src/db.js')
 const urls = require('./src/routes/urls.routes')
 const redirectUrl = require('./src/routes/redirecturl.routes.js')
 const auth = require('./src/routes/auth.routes.js')
+const obtenerInfo = require('./src/routes/obtenerInfo.routes.js')
 
 // * PUERTO Y FRONT
 const { PORT, FRONTEND_URL } = require('./src/config')
@@ -37,6 +38,7 @@ app.use(cookieParser(null, {
 app.use('/api', urls)
 app.use('/r', redirectUrl)
 app.use('/api', auth)
+app.use('/', obtenerInfo)
 
 connectMongoDB()
 

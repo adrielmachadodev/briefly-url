@@ -13,6 +13,7 @@ import Header from './components/Header'
 import Logout from './components/Logout'
 
 import { ToastContainer } from 'react-toastify' 
+import ImageSlider from './views/ImageSlider'
 
 const ProtectedRoute = ({children}) => {
 
@@ -54,6 +55,7 @@ function App() {
           <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
           <Route path="/login" element={<IsLogged><Login /></IsLogged>} />
           <Route path="/register" element={<IsLogged><Register /></IsLogged>} />
+          <Route path="/pruebas" element={<ImageSlider/>} />
         </Routes>
         <ToastContainer />
       </div>
