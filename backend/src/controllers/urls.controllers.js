@@ -60,7 +60,7 @@ const saveUrl = async (req, res) => {
 
 const getUrl = async (req, res) => {
     try {
-        const urlsFound = await Url.find().populate("user")
+        const urlsFound = await Url.find({user:req.user.id}).populate("user")
         res.json(urlsFound)
     } catch (error) {
         console.log(error);
