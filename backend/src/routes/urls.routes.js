@@ -16,7 +16,7 @@ const getTokenAndValidate = require('../middlewares/getTokenAndValidate.middlewa
 const router = Router()
 
 router.post('/urls', isLogged, createUrl)
-router.get('/urls', getTokenAndValidate, getUrl)
+router.get('/urls', getUrl)
 router.delete('/urls/:id', getTokenAndValidate, deleteUrl)
 router.put('/urls/:id', getTokenAndValidate, saveUrl)
 router.patch('/urls/:id', getTokenAndValidate, editUrl)
